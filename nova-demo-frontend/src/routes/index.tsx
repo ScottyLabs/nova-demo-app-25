@@ -1,5 +1,4 @@
 import { createFileRoute } from '@tanstack/react-router'
-import { ReactQueryDevtools } from '@tanstack/react-query-devtools'
 import { useState } from 'react'
 import 'highlight.js/styles/github-dark.css'
 
