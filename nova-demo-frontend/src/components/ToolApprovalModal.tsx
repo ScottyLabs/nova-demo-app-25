@@ -3,6 +3,7 @@
  */
 
 import type { ToolCall } from '@/types/chat'
+import { Tool01 } from '@untitledui/icons'
 
 interface ToolApprovalModalProps {
   show: boolean
@@ -28,7 +29,7 @@ export const ToolApprovalModal = ({
       {toolCalls.map((toolCall, index) => (
       <div key={index} className="bg-white/10 rounded p-3">
         <div className="font-medium text-black">
-        🔧 {toolCall.function?.name || 'Unknown Tool'}
+        <Tool01 className="inline-block align-middle ml-1" /> {toolCall.function?.name || 'Unknown Tool'}
         </div>
         {toolCall.function?.description && (
         <div className="text-sm text-black/70 mt-1">{toolCall.function.description}</div>

@@ -2,6 +2,8 @@
  * MCP (Model Context Protocol) configuration panel
  */
 
+import { Tool01 } from "@untitledui/icons"
+
 interface MCPControlsProps {
   mcpEnabled: boolean
   onMcpEnabledChange: (enabled: boolean) => void
@@ -59,7 +61,7 @@ export const MCPControls = ({
           key={index}
           className="bg-orange-50 text-orange-700 px-2 py-1 rounded text-xs flex items-center gap-1"
           >
-          <span>🔧</span>
+          <span><Tool01 className="inline-block align-middle ml-1" /></span>
           <span>{tool.function?.name || 'Unknown'}</span>
           </div>
         ))}
