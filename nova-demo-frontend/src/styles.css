@@ -13,3 +13,23 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
   monospace;
 }
+
+/* Mobile optimization */
+@media (max-width: 1024px) {
+  html, body, #app {
+    height: 100%;
+    overflow: hidden;
+  }
+}
+
+/* Smooth scrolling for chat messages */
+.overflow-y-auto {
+  -webkit-overflow-scrolling: touch;
+}
+
+/* Prevent text selection on buttons */
+button {
+  -webkit-tap-highlight-color: transparent;
+  -webkit-touch-callout: none;
+  user-select: none;
+}

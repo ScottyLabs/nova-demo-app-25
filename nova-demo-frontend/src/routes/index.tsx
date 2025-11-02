@@ -30,6 +30,7 @@ function ChatDemo() {
   const [mcpEnabled, setMcpEnabled] = useState(false)
   const [selectedMcpServer, setSelectedMcpServer] = useState('cmu_api')
   const [mcpAutoApprove, setMcpAutoApprove] = useState(true)
+  const [sidebarOpen, setSidebarOpen] = useState(false)
 
   // Fetch available models
   const { data: availableModels } = useAvailableModels()
@@ -104,27 +105,83 @@ function ChatDemo() {
   setUploadedPdf(null)
   }
 
+  // Handle model selection and close sidebar on mobile
+  const handleModelSelect = (modelId: string) => {
+    setSelectedModel(modelId)
+    // Close sidebar on mobile after selection
+    if (window.innerWidth < 1024) {
+      setSidebarOpen(false)
+    }
+  }
+
   return (
-    <div className="flex h-screen bg-white text-black overflow-hidden">
+    <div className="flex h-screen bg-white text-black overflow-hidden relative">
+      {/* Mobile Menu Button */}
+      <button
+        onClick={() => setSidebarOpen(!sidebarOpen)}
+        className="fixed top-4 left-4 z-50 lg:hidden bg-gray-800 text-white p-2 rounded-lg shadow-lg hover:bg-gray-700 transition-colors"
+        aria-label="Toggle sidebar"
+      >
+        <svg
+          className="w-6 h-6"
+          fill="none"
+          stroke="currentColor"
+          viewBox="0 0 24 24"
+        >
+          {sidebarOpen ? (
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              strokeWidth={2}
+              d="M6 18L18 6M6 6l12 12"
+            />
+          ) : (
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              strokeWidth={2}
+              d="M4 6h16M4 12h16M4 18h16"
+            />
+          )}
+        </svg>
+      </button>
+
+      {/* Overlay for mobile */}
+      {sidebarOpen && (
+        <div
+          className="fixed inset-0 bg-black/50 z-30 lg:hidden"
+          onClick={() => setSidebarOpen(false)}
+        />
+      )}
+
       {/* Sidebar */}
-      <Sidebar
-        availableModels={availableModels}
-        selectedModel={selectedModel}
-        onModelSelect={setSelectedModel}
-        currentlyStreaming={currentlyStreaming}
-        selectedModelData={selectedModelData}
-        mcpEnabled={mcpEnabled}
-        onMcpEnabledChange={setMcpEnabled}
-        selectedMcpServer={selectedMcpServer}
-        onMcpServerChange={setSelectedMcpServer}
-        mcpServers={mcpServers}
-        mcpAutoApprove={mcpAutoApprove}
-        onMcpAutoApproveChange={setMcpAutoApprove}
-        mcpTools={mcpTools}
-      />
+      <div
+        className={`
+          fixed lg:static inset-y-0 left-0 z-40
+          w-80 lg:w-80
+          transform transition-transform duration-300 ease-in-out
+          ${sidebarOpen ? 'translate-x-0' : '-translate-x-full lg:translate-x-0'}
+        `}
+      >
+        <Sidebar
+          availableModels={availableModels}
+          selectedModel={selectedModel}
+          onModelSelect={handleModelSelect}
+          currentlyStreaming={currentlyStreaming}
+          selectedModelData={selectedModelData}
+          mcpEnabled={mcpEnabled}
+          onMcpEnabledChange={setMcpEnabled}
+          selectedMcpServer={selectedMcpServer}
+          onMcpServerChange={setSelectedMcpServer}
+          mcpServers={mcpServers}
+          mcpAutoApprove={mcpAutoApprove}
+          onMcpAutoApproveChange={setMcpAutoApprove}
+          mcpTools={mcpTools}
+        />
+      </div>
 
       {/* Main Chat Area */}
-      <div className="flex-1 flex flex-col h-screen">
+      <div className="flex-1 flex flex-col h-screen w-full lg:w-auto">
         <ChatMessages messages={chatMessages} />
 
         <ChatInput

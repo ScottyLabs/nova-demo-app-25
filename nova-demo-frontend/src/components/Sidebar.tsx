@@ -39,9 +39,9 @@ export const Sidebar = ({
   mcpTools,
 }: SidebarProps) => {
   return (
-    <div className="bg-gray-50 border-r border-gray-200 p-6 overflow-y-auto flex flex-col gap-6">
+    <div className="bg-gray-50 border-r border-gray-200 p-4 lg:p-6 overflow-y-auto flex flex-col gap-4 lg:gap-6 h-full">
       <div>
-        <h2 className="text-lg font-semibold mb-4 text-gray-900">Model Settings</h2>
+        <h2 className="text-base lg:text-lg font-semibold mb-3 lg:mb-4 text-gray-900">Model Settings</h2>
         
         <div className="space-y-4">
           <div>
@@ -58,8 +58,8 @@ export const Sidebar = ({
         </div>
       </div>
 
-      <div className="border-t border-gray-200 pt-6">
-        <h2 className="text-lg font-semibold mb-4 text-gray-900">MCP Settings</h2>
+      <div className="border-t border-gray-200 pt-4 lg:pt-6">
+        <h2 className="text-base lg:text-lg font-semibold mb-3 lg:mb-4 text-gray-900">MCP Settings</h2>
         <MCPControls
           mcpEnabled={mcpEnabled}
           onMcpEnabledChange={onMcpEnabledChange}

@@ -22,7 +22,7 @@ export const ChatMessages = ({ messages }: ChatMessagesProps) => {
   }, [messages])
 
   return (
-  <div className="flex-1 overflow-y-auto p-6 space-y-4">
+  <div className="flex-1 overflow-y-auto p-3 sm:p-4 md:p-6 space-y-3 sm:space-y-4">
     {messages.length === 0 && (
     <div className="text-center text-black/70 py-8">Start a conversation with Nova AI!</div>
     )}
@@ -33,7 +33,7 @@ export const ChatMessages = ({ messages }: ChatMessagesProps) => {
       className={`flex ${message.role === 'user' ? 'justify-end' : 'justify-start'}`}
     >
       <div
-      className={`max-w-[70%] p-4 rounded-lg ${
+      className={`max-w-[85%] sm:max-w-[75%] md:max-w-[70%] p-3 sm:p-4 rounded-lg ${
         message.role === 'user'
         ? 'bg-[#F5F5F5] text-black'
         : 'bg-[#F5F5F5]/10 border border-black/20 text-black'

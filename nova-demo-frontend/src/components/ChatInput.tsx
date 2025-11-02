@@ -71,7 +71,7 @@ export const ChatInput = ({
   }
 
   return (
-  <div className="p-6 border-t border-black/20">
+  <div className="p-3 sm:p-4 md:p-6 border-t border-black/20">
     {/* File Previews */}
     {uploadedImage && <ImagePreview image={uploadedImage} onRemove={onImageRemove} />}
     {uploadedAudio && <AudioPreview audio={uploadedAudio} onRemove={onAudioRemove} />}
@@ -116,14 +116,14 @@ export const ChatInput = ({
     />
 
     {/* Input area */}
-    <div className="flex gap-2">
+    <div className="flex gap-1 sm:gap-2">
     <input
       type="text"
       value={inputValue}
       onChange={(e) => onInputChange(e.target.value)}
       onKeyDown={handleKeyDown}
       placeholder="Type your message..."
-      className="flex-1 p-3 rounded-lg bg-white/10 border border-black/20 text-black placeholder-white/50 focus:outline-none focus:ring-2 focus:ring-blue-500"
+      className="flex-1 p-2 sm:p-3 rounded-lg bg-white/10 border border-black/20 text-black placeholder-white/50 focus:outline-none focus:ring-2 focus:ring-blue-500 text-sm sm:text-base"
       disabled={currentlyStreaming}
     />
 
@@ -131,30 +131,30 @@ export const ChatInput = ({
     <button
       onClick={() => pdfInputRef.current?.click()}
       disabled={currentlyStreaming}
-      className="px-4 py-3 disabled:bg-gray-300 bg-gray-600 disabled:cursor-not-allowed text-black rounded-lg font-medium transition-colors"
+      className="px-2 sm:px-4 py-2 sm:py-3 disabled:bg-gray-300 bg-gray-600 disabled:cursor-not-allowed text-black rounded-lg font-medium transition-colors"
       title="Upload PDF"
     >
-      <FileAttachment04 className='text-white'/>
+      <FileAttachment04 className='text-white w-5 h-5 sm:w-6 sm:h-6'/>
     </button>
 
     {/* Audio upload button */}
     <button
       onClick={() => audioInputRef.current?.click()}
       disabled={currentlyStreaming}
-      className="px-4 py-3 disabled:bg-gray-300 bg-gray-600 disabled:cursor-not-allowed text-black rounded-lg font-medium transition-colors"
+      className="px-2 sm:px-4 py-2 sm:py-3 disabled:bg-gray-300 bg-gray-600 disabled:cursor-not-allowed text-black rounded-lg font-medium transition-colors"
       title="Upload audio"
     >
-      <MusicNotePlus className='text-white'/>
+      <MusicNotePlus className='text-white w-5 h-5 sm:w-6 sm:h-6'/>
     </button>
 
     {/* Image upload button */}
     <button
       onClick={() => fileInputRef.current?.click()}
       disabled={currentlyStreaming}
-      className="px-4 py-3 disabled:bg-gray-300 bg-gray-600 disabled:cursor-not-allowed text-black rounded-lg font-medium transition-colors"
+      className="px-2 sm:px-4 py-2 sm:py-3 disabled:bg-gray-300 bg-gray-600 disabled:cursor-not-allowed text-black rounded-lg font-medium transition-colors"
       title="Upload image"
     >
-      <Camera01 className='text-white'/>
+      <Camera01 className='text-white w-5 h-5 sm:w-6 sm:h-6'/>
     </button>
 
     {/* Send button */}
@@ -164,14 +164,14 @@ export const ChatInput = ({
       (!inputValue.trim() && !uploadedImage && !uploadedAudio && !uploadedPdf) ||
       currentlyStreaming
       }
-      className="px-6 py-3 disabled:bg-gray-300 bg-gray-600 disabled:cursor-not-allowed text-white rounded-lg font-medium transition-colors"
+      className="px-3 sm:px-6 py-2 sm:py-3 disabled:bg-gray-300 bg-gray-600 disabled:cursor-not-allowed text-white rounded-lg font-medium transition-colors text-sm sm:text-base"
     >
       {currentlyStreaming ? currentlySending ? 'Sending...' : <Spinner /> : 'Send'}
     </button>
     </div>
 
     {/* Help text */}
-    <div className="text-xs text-black/50 mt-2">
+    <div className="text-xs text-black/50 mt-2 hidden sm:block">
     <span>Press Enter to send</span>
     {selectedModel && (
       <>
