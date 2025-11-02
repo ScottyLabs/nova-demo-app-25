@@ -39,8 +39,7 @@ export const ChatHeader = ({
   mcpTools,
 }: ChatHeaderProps) => {
   return (
-  <div className="p-6 border-b border-white/20">
-    <h1 className="text-2xl mb-4">Nova Chat Demo</h1>
+  <div className="p-6 border-b border-black/20">
     <div className="flex items-center gap-4">
     <label className="text-sm">Model:</label>
     <ModelSelector

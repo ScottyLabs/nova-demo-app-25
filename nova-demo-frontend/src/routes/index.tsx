@@ -11,7 +11,7 @@ import { useMCP } from '@/hooks/useMCP'
 import { useChatStreaming } from '@/hooks/useChatStreaming'
 
 // Components
-import { ChatHeader } from '@/components/ChatHeader'
+import { Sidebar } from '@/components/Sidebar'
 import { ChatMessages } from '@/components/ChatMessages'
 import { ChatInput } from '@/components/ChatInput'
 
@@ -105,53 +105,49 @@ function ChatDemo() {
   }
 
   return (
-  <div
-    className="flex items-center justify-center min-h-screen bg-gradient-to-br from-purple-100 to-blue-100 p-4 text-white"
-    style={{
-    background:
-      'linear-gradient(180deg, #101C1C -89.89%, #101C1C -5.74%, #173C46 32.51%, #226981 56.18%, #33B2E2 71.72%, #F1EDE6 85.34%, #FF8945 101.72%), #CCC',
-    }}
-  >
-    <div className="w-full max-w-4xl h-[80vh] flex flex-col rounded-[20px] bg-[#101C1C]">
-    <ChatHeader
-      availableModels={availableModels}
-      selectedModel={selectedModel}
-      onModelSelect={setSelectedModel}
-      currentlyStreaming={currentlyStreaming}
-      selectedModelData={selectedModelData}
-      mcpEnabled={mcpEnabled}
-      onMcpEnabledChange={setMcpEnabled}
-      selectedMcpServer={selectedMcpServer}
-      onMcpServerChange={setSelectedMcpServer}
-      mcpServers={mcpServers}
-      mcpAutoApprove={mcpAutoApprove}
-      onMcpAutoApproveChange={setMcpAutoApprove}
-      mcpTools={mcpTools}
-    />
+    <div className="flex h-screen bg-white text-black overflow-hidden">
+      {/* Sidebar */}
+      <Sidebar
+        availableModels={availableModels}
+        selectedModel={selectedModel}
+        onModelSelect={setSelectedModel}
+        currentlyStreaming={currentlyStreaming}
+        selectedModelData={selectedModelData}
+        mcpEnabled={mcpEnabled}
+        onMcpEnabledChange={setMcpEnabled}
+        selectedMcpServer={selectedMcpServer}
+        onMcpServerChange={setSelectedMcpServer}
+        mcpServers={mcpServers}
+        mcpAutoApprove={mcpAutoApprove}
+        onMcpAutoApproveChange={setMcpAutoApprove}
+        mcpTools={mcpTools}
+      />
 
-    <ChatMessages messages={chatMessages} />
+      {/* Main Chat Area */}
+      <div className="flex-1 flex flex-col h-screen">
+        <ChatMessages messages={chatMessages} />
 
-    <ChatInput
-      inputValue={inputValue}
-      onInputChange={setInputValue}
-      onSend={handleSendMessage}
-      uploadedImage={uploadedImage}
-      uploadedAudio={uploadedAudio}
-      uploadedPdf={uploadedPdf}
-      onImageUpload={setUploadedImage}
-      onAudioUpload={setUploadedAudio}
-      onPdfUpload={setUploadedPdf}
-      onImageRemove={() => setUploadedImage(null)}
-      onAudioRemove={() => setUploadedAudio(null)}
-      onPdfRemove={() => setUploadedPdf(null)}
-      currentlyStreaming={currentlyStreaming}
-      currentlySending={currentlySending}
-      selectedModel={selectedModelData}
-      mcpEnabled={mcpEnabled}
-      mcpToolsCount={mcpTools.length}
-      mcpAutoApprove={mcpAutoApprove}
-    />
+        <ChatInput
+          inputValue={inputValue}
+          onInputChange={setInputValue}
+          onSend={handleSendMessage}
+          uploadedImage={uploadedImage}
+          uploadedAudio={uploadedAudio}
+          uploadedPdf={uploadedPdf}
+          onImageUpload={setUploadedImage}
+          onAudioUpload={setUploadedAudio}
+          onPdfUpload={setUploadedPdf}
+          onImageRemove={() => setUploadedImage(null)}
+          onAudioRemove={() => setUploadedAudio(null)}
+          onPdfRemove={() => setUploadedPdf(null)}
+          currentlyStreaming={currentlyStreaming}
+          currentlySending={currentlySending}
+          selectedModel={selectedModelData}
+          mcpEnabled={mcpEnabled}
+          mcpToolsCount={mcpTools.length}
+          mcpAutoApprove={mcpAutoApprove}
+        />
+      </div>
     </div>
-  </div>
   )
 }

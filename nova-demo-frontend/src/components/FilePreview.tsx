@@ -15,11 +15,12 @@ export const ImagePreview = ({ image, onRemove }: ImagePreviewProps) => {
     <img
     src={image.url}
     alt="Upload preview"
-    className="max-h-32 rounded-lg border border-white/20"
+    className="max-h-32 rounded-lg border border-black/20"
     />
     <button
     onClick={onRemove}
-    className="absolute -top-2 -right-2 bg-red-500 hover:bg-red-600 text-white rounded-full w-6 h-6 flex items-center justify-center text-sm"
+    className="absolute -top-2 -right-2 text-black rounded-full w-6 h-6 flex items-center justify-center text-sm"
+    style={{ backgroundColor: 'hsla(0, 0%, 96%, 1)' }}
     >
     ×
     </button>
@@ -35,12 +36,13 @@ interface AudioPreviewProps {
 export const AudioPreview = ({ audio, onRemove }: AudioPreviewProps) => {
   return (
   <div className="mb-4 relative inline-block">
-    <div className="bg-white/10 border border-white/20 rounded-lg p-3">
+    <div className="bg-white/10 border border-black/20 rounded-lg p-3">
     <div className="flex items-center gap-2 mb-2">
-      <span className="text-sm text-white/70">🎵 Audio file ({audio.format})</span>
+      <span className="text-sm text-black/70">🎵 Audio file ({audio.format})</span>
       <button
       onClick={onRemove}
-      className="bg-red-500 hover:bg-red-600 text-white rounded-full w-5 h-5 flex items-center justify-center text-xs"
+      className="text-black rounded-full w-5 h-5 flex items-center justify-center text-xs"
+      style={{ backgroundColor: 'hsla(0, 0%, 96%, 1)' }}
       >
       ×
       </button>
@@ -66,12 +68,13 @@ interface PdfPreviewProps {
 export const PdfPreview = ({ pdf, onRemove }: PdfPreviewProps) => {
   return (
   <div className="mb-4 relative inline-block">
-    <div className="bg-white/10 border border-white/20 rounded-lg p-3">
+    <div className="bg-white/10 border border-black/20 rounded-lg p-3">
     <div className="flex items-center gap-2 mb-2">
-      <span className="text-sm text-white/70">📄 PDF file: {pdf.filename}</span>
+      <span className="text-sm text-black/70">📄 PDF file: {pdf.filename}</span>
       <button
       onClick={onRemove}
-      className="bg-red-500 hover:bg-red-600 text-white rounded-full w-5 h-5 flex items-center justify-center text-xs"
+      className="text-black rounded-full w-5 h-5 flex items-center justify-center text-xs"
+      style={{ backgroundColor: 'hsla(0, 0%, 96%, 1)' }}
       >
       ×
       </button>
@@ -80,7 +83,8 @@ export const PdfPreview = ({ pdf, onRemove }: PdfPreviewProps) => {
       <a
       href={pdf.url}
       download={pdf.filename}
-      className="px-3 py-1 bg-blue-600 hover:bg-blue-700 text-white text-sm rounded transition-colors"
+      className="px-3 py-1 text-black text-sm rounded transition-colors"
+      style={{ backgroundColor: 'hsla(0, 0%, 96%, 1)' }}
       >
       Download
       </a>
@@ -88,7 +92,8 @@ export const PdfPreview = ({ pdf, onRemove }: PdfPreviewProps) => {
       href={pdf.url}
       target="_blank"
       rel="noopener noreferrer"
-      className="px-3 py-1 bg-gray-600 hover:bg-gray-700 text-white text-sm rounded transition-colors"
+      className="px-3 py-1 text-black text-sm rounded transition-colors"
+      style={{ backgroundColor: 'hsla(0, 0%, 96%, 1)' }}
       >
       Open
       </a>

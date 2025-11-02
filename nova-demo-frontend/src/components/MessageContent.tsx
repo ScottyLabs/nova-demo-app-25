@@ -31,15 +31,15 @@ function MessageContent({ content, role, image, audio, pdf }: MessageContentProp
       <img 
         src={image.url} 
         alt="Uploaded image" 
-        className="max-w-full max-h-64 rounded-lg border border-white/20"
+        className="max-w-full max-h-64 rounded-lg border border-black/20"
       />
       </div>
     )}
     {audio && (
       <div className="mb-3">
-      <div className="bg-white/10 border border-white/20 rounded-lg p-3">
+      <div className="bg-white/10 border border-black/20 rounded-lg p-3">
         <div className="flex items-center gap-2 mb-2">
-        <span className="text-sm text-white/70">🎵 Audio file ({audio.format})</span>
+        <span className="text-sm text-black/70">🎵 Audio file ({audio.format})</span>
         </div>
         <audio 
         controls 
@@ -54,15 +54,16 @@ function MessageContent({ content, role, image, audio, pdf }: MessageContentProp
     )}
     {pdf && (
       <div className="mb-3">
-      <div className="bg-white/10 border border-white/20 rounded-lg p-3">
+      <div className="bg-white/10 border border-black/20 rounded-lg p-3">
         <div className="flex items-center gap-2 mb-2">
-        <span className="text-sm text-white/70">📄 PDF file: {pdf.filename}</span>
+        <span className="text-sm text-black/70">📄 PDF file: {pdf.filename}</span>
         </div>
         <div className="flex gap-2">
         <a 
           href={pdf.url}
           download={pdf.filename}
-          className="px-3 py-1 bg-blue-600 hover:bg-blue-700 text-white text-sm rounded transition-colors"
+          className="px-3 py-1 text-black text-sm rounded transition-colors"
+          style={{ backgroundColor: 'hsla(0, 0%, 96%, 1)' }}
         >
           Download PDF
         </a>
@@ -70,7 +71,8 @@ function MessageContent({ content, role, image, audio, pdf }: MessageContentProp
           href={pdf.url}
           target="_blank"
           rel="noopener noreferrer"
-          className="px-3 py-1 bg-gray-600 hover:bg-gray-700 text-white text-sm rounded transition-colors"
+          className="px-3 py-1 text-black text-sm rounded transition-colors"
+          style={{ backgroundColor: 'hsla(0, 0%, 96%, 1)' }}
         >
           Open in New Tab
         </a>
@@ -90,7 +92,7 @@ function MessageContent({ content, role, image, audio, pdf }: MessageContentProp
       <img 
       src={image.url} 
       alt="Generated image" 
-      className="max-w-full max-h-64 rounded-lg border border-white/20"
+      className="max-w-full max-h-64 rounded-lg border border-black/20"
       onError={(e) => {
         console.error('Image failed to load:', image.url)
         e.currentTarget.style.display = 'none'

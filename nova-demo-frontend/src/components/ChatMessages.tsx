@@ -24,7 +24,7 @@ export const ChatMessages = ({ messages }: ChatMessagesProps) => {
   return (
   <div className="flex-1 overflow-y-auto p-6 space-y-4">
     {messages.length === 0 && (
-    <div className="text-center text-white/70 py-8">Start a conversation with Nova AI!</div>
+    <div className="text-center text-black/70 py-8">Start a conversation with Nova AI!</div>
     )}
 
     {messages.map((message) => (
@@ -35,8 +35,8 @@ export const ChatMessages = ({ messages }: ChatMessagesProps) => {
       <div
       className={`max-w-[70%] p-4 rounded-lg ${
         message.role === 'user'
-        ? 'bg-[#1B4957] text-white'
-        : 'bg-white/10 border border-white/20 text-white'
+        ? 'bg-[#F5F5F5] text-black'
+        : 'bg-[#F5F5F5]/10 border border-black/20 text-black'
       }`}
       >
       <MessageContent

@@ -1,0 +1,76 @@
+/**
+ * Sidebar with model selection and MCP controls
+ */
+
+import type { Model } from '@/types/chat'
+import { ModelSelector } from './ModelSelector'
+import { ModelCapabilities } from './ModelCapabilities'
+import { MCPControls } from './MCPControls'
+
+interface SidebarProps {
+  availableModels: Model[] | undefined
+  selectedModel: string
+  onModelSelect: (modelId: string) => void
+  currentlyStreaming: boolean
+  selectedModelData: Model | undefined
+  mcpEnabled: boolean
+  onMcpEnabledChange: (enabled: boolean) => void
+  selectedMcpServer: string
+  onMcpServerChange: (server: string) => void
+  mcpServers: string[]
+  mcpAutoApprove: boolean
+  onMcpAutoApproveChange: (autoApprove: boolean) => void
+  mcpTools: any[]
+}
+
+export const Sidebar = ({
+  availableModels,
+  selectedModel,
+  onModelSelect,
+  currentlyStreaming,
+  selectedModelData,
+  mcpEnabled,
+  onMcpEnabledChange,
+  selectedMcpServer,
+  onMcpServerChange,
+  mcpServers,
+  mcpAutoApprove,
+  onMcpAutoApproveChange,
+  mcpTools,
+}: SidebarProps) => {
+  return (
+    <div className="bg-gray-50 border-r border-gray-200 p-6 overflow-y-auto flex flex-col gap-6">
+      <div>
+        <h2 className="text-lg font-semibold mb-4 text-gray-900">Model Settings</h2>
+        
+        <div className="space-y-4">
+          <div>
+            <label className="text-sm font-medium text-gray-700 block mb-2">Select Model:</label>
+            <ModelSelector
+              availableModels={availableModels}
+              selectedModel={selectedModel}
+              onModelSelect={onModelSelect}
+              disabled={currentlyStreaming}
+            />
+          </div>
+
+          <ModelCapabilities model={selectedModelData} />
+        </div>
+      </div>
+
+      <div className="border-t border-gray-200 pt-6">
+        <h2 className="text-lg font-semibold mb-4 text-gray-900">MCP Settings</h2>
+        <MCPControls
+          mcpEnabled={mcpEnabled}
+          onMcpEnabledChange={onMcpEnabledChange}
+          selectedMcpServer={selectedMcpServer}
+          onMcpServerChange={onMcpServerChange}
+          mcpServers={mcpServers}
+          mcpAutoApprove={mcpAutoApprove}
+          onMcpAutoApproveChange={onMcpAutoApproveChange}
+          mcpTools={mcpTools}
+        />
+      </div>
+    </div>
+  )
+}

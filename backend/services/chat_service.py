@@ -2,14 +2,18 @@
 Chat service for handling AI model interactions
 """
 
+import os
+from dotenv import load_dotenv
 import requests
 import json
 import asyncio
 from typing import Generator, Dict, Any, List
 from models.schemas import Message
 from services.mcp_service import mcp_manager
-from utils import OPENROUTER_API_KEY
 
+load_dotenv()
+OPENROUTER_API_KEY = os.getenv("OPENROUTER_API_KEY")
+print("OPENROUTER_API_KEY:", OPENROUTER_API_KEY)
 
 class ChatService:
     """Service for managing chat interactions with AI models"""
@@ -244,8 +248,7 @@ class ChatService:
     ) -> Dict[str, Any]:
         """Execute approved tool calls and stream final response"""
         print("tool_calls:", tool_calls)
-        clients = await mcp_manager.get_or_create_all_clients()
-        client = clients[0]  # TODO: fix this Assuming single MCP server for simplicity
+        await mcp_manager.get_or_create_all_clients()
 
         messages = payload["messages"]
         messages.append(
@@ -255,7 +258,7 @@ class ChatService:
         for tool_call in tool_calls:
             tool_name = tool_call["function"]["name"]
             tool_args = json.loads(tool_call["function"]["arguments"] or "{}")
-            tool_result = await client.call_tool(tool_name, tool_args)
+            tool_result = await mcp_manager.call_tool(tool_name, tool_args)
 
             messages.append(
                 {

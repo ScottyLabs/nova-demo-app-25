@@ -9,6 +9,8 @@ import {
   supportsImageGeneration,
 } from '@/utils/modelCapabilities'
 
+import { Eye, FileAttachment04, MusicNotePlus, Palette } from "@untitledui/icons";
+
 interface ModelCapabilitiesProps {
   model: Model | undefined
 }
@@ -17,26 +19,35 @@ export const ModelCapabilities = ({ model }: ModelCapabilitiesProps) => {
   if (!model) return null
 
   return (
-  <div className="mt-3 text-xs text-white/70">
-    <span>Capabilities: </span>
+  <div className="mt-3">
+    <div className="text-xs font-medium text-gray-700 mb-2">Capabilities:</div>
+    <div className="space-y-2">
     {supportsImageInput(model) && (
-    <span className="bg-green-500/20 text-green-300 px-2 py-1 rounded mr-2">
-      👁️ Can view images
-    </span>
+    <div 
+      className="px-3 py-2 rounded text-sm flex items-center gap-2"
+      style={{ backgroundColor: 'hsla(140, 45%, 94%, 1)', color: 'hsla(141, 84%, 24%, 1)' }}
+    >
+      <span><Eye className="inline-block align-middle ml-1" /></span>
+      <span>Can view images</span>
+    </div>
     )}
     {supportsAudioInput(model) && (
-    <span className="bg-blue-500/20 text-blue-300 px-2 py-1 rounded mr-2">
-      🎵 Can process audio
-    </span>
+    <div className="px-3 py-2 rounded text-sm flex items-center gap-2 bg-blue-50 text-blue-700">
+      <span><MusicNotePlus className="inline-block align-middle ml-1" /></span>
+      <span>Can process audio</span>
+    </div>
     )}
-    <span className="bg-red-500/20 text-red-300 px-2 py-1 rounded mr-2">
-    📄 Can process PDFs
-    </span>
+    <div className="px-3 py-2 rounded text-sm flex items-center gap-2 bg-red-50 text-red-700">
+      <span><FileAttachment04 className="inline-block align-middle ml-1" /></span>
+      <span>Can process PDFs</span>
+    </div>
     {supportsImageGeneration(model) && (
-    <span className="bg-purple-500/20 text-purple-300 px-2 py-1 rounded mr-2">
-      🎨 Can generate images
-    </span>
+    <div className="px-3 py-2 rounded text-sm flex items-center gap-2 bg-purple-50 text-purple-700">
+      <span><Palette className="inline-block align-middle ml-1" /></span>
+      <span>Can generate images</span>
+    </div>
     )}
+    </div>
   </div>
   )
 }

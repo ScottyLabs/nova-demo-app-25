@@ -200,6 +200,18 @@ class MCPManager:
         print(f"Error creating client for {server_type}: {e}")
     return clients
 
+  async def call_tool(self, tool_name: str, tool_args: Dict[str, Any]) -> Dict[str, Any]:
+    """Call a tool on the connected mcp clients matching the tool name"""
+    for client in self.clients.values():
+      if any(tool['function']['name'] == tool_name for tool in client.available_tools):
+        return await client.call_tool(tool_name, tool_args)
+    return {
+      "success": False,
+      "error": f"No connected MCP client has tool {tool_name}",
+      "tool_name": tool_name,
+      "tool_args": tool_args
+    }
+
   async def cleanup_all(self):
     """Clean up all MCP client connections"""
     for client in self.clients.values():

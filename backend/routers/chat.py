@@ -8,10 +8,7 @@ import requests
 
 from models.schemas import ChatRequest, ToolCallApprovalRequest
 from services.chat_service import ChatService
-from services.mcp_service import mcp_manager
-from utils import OPENROUTER_API_KEY
 import json
-import asyncio
 
 router = APIRouter()
 

@@ -16,6 +16,7 @@ import {
   supportsAudioInput,
   supportsImageGeneration,
 } from '@/utils/modelCapabilities'
+import {MusicNotePlus, Camera01, FileAttachment04} from "@untitledui/icons";
 
 interface ChatInputProps {
   inputValue: string
@@ -70,7 +71,7 @@ export const ChatInput = ({
   }
 
   return (
-  <div className="p-6 border-t border-white/20">
+  <div className="p-6 border-t border-black/20">
     {/* File Previews */}
     {uploadedImage && <ImagePreview image={uploadedImage} onRemove={onImageRemove} />}
     {uploadedAudio && <AudioPreview audio={uploadedAudio} onRemove={onAudioRemove} />}
@@ -122,7 +123,7 @@ export const ChatInput = ({
       onChange={(e) => onInputChange(e.target.value)}
       onKeyDown={handleKeyDown}
       placeholder="Type your message..."
-      className="flex-1 p-3 rounded-lg bg-white/10 border border-white/20 text-white placeholder-white/50 focus:outline-none focus:ring-2 focus:ring-blue-500"
+      className="flex-1 p-3 rounded-lg bg-white/10 border border-black/20 text-black placeholder-white/50 focus:outline-none focus:ring-2 focus:ring-blue-500"
       disabled={currentlyStreaming}
     />
 
@@ -130,30 +131,30 @@ export const ChatInput = ({
     <button
       onClick={() => pdfInputRef.current?.click()}
       disabled={currentlyStreaming}
-      className="px-4 py-3 bg-red-600 hover:bg-red-700 disabled:bg-gray-600 disabled:cursor-not-allowed text-white rounded-lg font-medium transition-colors"
+      className="px-4 py-3 disabled:bg-gray-300 bg-gray-600 disabled:cursor-not-allowed text-black rounded-lg font-medium transition-colors"
       title="Upload PDF"
     >
-      📄
+      <FileAttachment04 className='text-white'/>
     </button>
 
     {/* Audio upload button */}
     <button
       onClick={() => audioInputRef.current?.click()}
       disabled={currentlyStreaming}
-      className="px-4 py-3 bg-orange-600 hover:bg-orange-700 disabled:bg-gray-600 disabled:cursor-not-allowed text-white rounded-lg font-medium transition-colors"
+      className="px-4 py-3 disabled:bg-gray-300 bg-gray-600 disabled:cursor-not-allowed text-black rounded-lg font-medium transition-colors"
       title="Upload audio"
     >
-      🎵
+      <MusicNotePlus className='text-white'/>
     </button>
 
     {/* Image upload button */}
     <button
       onClick={() => fileInputRef.current?.click()}
       disabled={currentlyStreaming}
-      className="px-4 py-3 bg-purple-600 hover:bg-purple-700 disabled:bg-gray-600 disabled:cursor-not-allowed text-white rounded-lg font-medium transition-colors"
+      className="px-4 py-3 disabled:bg-gray-300 bg-gray-600 disabled:cursor-not-allowed text-black rounded-lg font-medium transition-colors"
       title="Upload image"
     >
-      📷
+      <Camera01 className='text-white'/>
     </button>
 
     {/* Send button */}
@@ -163,20 +164,20 @@ export const ChatInput = ({
       (!inputValue.trim() && !uploadedImage && !uploadedAudio && !uploadedPdf) ||
       currentlyStreaming
       }
-      className="px-6 py-3 bg-blue-600 hover:bg-blue-700 disabled:bg-gray-600 disabled:cursor-not-allowed text-white rounded-lg font-medium transition-colors"
+      className="px-6 py-3 disabled:bg-gray-300 bg-gray-600 disabled:cursor-not-allowed text-black rounded-lg font-medium transition-colors"
     >
       {currentlyStreaming ? currentlySending ? 'Sending...' : <Spinner /> : 'Send'}
     </button>
     </div>
 
     {/* Help text */}
-    <div className="text-xs text-white/50 mt-2">
+    <div className="text-xs text-black/50 mt-2">
     <span>Press Enter to send</span>
     {selectedModel && (
       <>
-      {supportsImageInput(selectedModel) && <span> • Upload images with 📷 button</span>}
-      {supportsAudioInput(selectedModel) && <span> • Upload audio with 🎵 button</span>}
-      <span> • Upload PDFs with 📄 button</span>
+      {supportsImageInput(selectedModel) && <span> • Upload images with <Camera01 className="inline-block align-middle ml-1" /> button</span>}
+      {supportsAudioInput(selectedModel) && <span> • Upload audio with <MusicNotePlus className="inline-block align-middle ml-1" /> button</span>}
+    <span> • Upload PDFs with <FileAttachment04 className="inline-block align-middle ml-1" /> button</span>
       {supportsImageGeneration(selectedModel) && <span> • Ask for image generation</span>}
       {mcpEnabled && mcpToolsCount > 0 && (
         <span>
