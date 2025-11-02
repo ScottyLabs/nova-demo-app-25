@@ -115,7 +115,7 @@ function ChatDemo() {
   }
 
   return (
-    <div className="flex h-screen bg-white text-black overflow-hidden relative">
+    <div className="flex bg-white text-black overflow-hidden">
       {/* Mobile Menu Button */}
       <button
         onClick={() => setSidebarOpen(!sidebarOpen)}
