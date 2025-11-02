@@ -16,7 +16,7 @@ import {
   supportsAudioInput,
   supportsImageGeneration,
 } from '@/utils/modelCapabilities'
-import {MusicNotePlus, Camera01, FileAttachment04} from "@untitledui/icons";
+import {MusicNotePlus, Camera01, FileAttachment04, Tool01} from "@untitledui/icons";
 
 interface ChatInputProps {
   inputValue: string
@@ -164,7 +164,7 @@ export const ChatInput = ({
       (!inputValue.trim() && !uploadedImage && !uploadedAudio && !uploadedPdf) ||
       currentlyStreaming
       }
-      className="px-6 py-3 disabled:bg-gray-300 bg-gray-600 disabled:cursor-not-allowed text-black rounded-lg font-medium transition-colors"
+      className="px-6 py-3 disabled:bg-gray-300 bg-gray-600 disabled:cursor-not-allowed text-white rounded-lg font-medium transition-colors"
     >
       {currentlyStreaming ? currentlySending ? 'Sending...' : <Spinner /> : 'Send'}
     </button>
@@ -182,7 +182,7 @@ export const ChatInput = ({
       {mcpEnabled && mcpToolsCount > 0 && (
         <span>
         {' '}
-        • MCP tools enabled (🔧 {mcpToolsCount} tools
+        • MCP tools enabled (<Tool01 className="inline-block align-middle ml-1" /> {mcpToolsCount} tools
         {mcpAutoApprove ? ', auto-approved' : ', requires approval'})
         </span>
       )}
