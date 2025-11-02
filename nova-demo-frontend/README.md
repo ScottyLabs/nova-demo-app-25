@@ -86,15 +86,15 @@ import { Link } from "@tanstack/react-router";
 
 export const Route = createRootRoute({
   component: () => (
-    <>
-      <header>
-        <nav>
-          <Link to="/">Home</Link>
-          <Link to="/about">About</Link>
-        </nav>
-      </header>
-      <Outlet />
-    </>
+  <>
+    <header>
+    <nav>
+      <Link to="/">Home</Link>
+      <Link to="/about">About</Link>
+    </nav>
+    </header>
+    <Outlet />
+  </>
   ),
 })
 ```
@@ -115,22 +115,22 @@ const peopleRoute = createRoute({
   getParentRoute: () => rootRoute,
   path: "/people",
   loader: async () => {
-    const response = await fetch("https://swapi.dev/api/people");
-    return response.json() as Promise<{
-      results: {
-        name: string;
-      }[];
-    }>;
+  const response = await fetch("https://swapi.dev/api/people");
+  return response.json() as Promise<{
+    results: {
+    name: string;
+    }[];
+  }>;
   },
   component: () => {
-    const data = peopleRoute.useLoaderData();
-    return (
-      <ul>
-        {data.results.map((person) => (
-          <li key={person.name}>{person.name}</li>
-        ))}
-      </ul>
-    );
+  const data = peopleRoute.useLoaderData();
+  return (
+    <ul>
+    {data.results.map((person) => (
+      <li key={person.name}>{person.name}</li>
+    ))}
+    </ul>
+  );
   },
 });
 ```
@@ -162,9 +162,9 @@ if (!rootElement.innerHTML) {
   const root = ReactDOM.createRoot(rootElement);
 
   root.render(
-    <QueryClientProvider client={queryClient}>
-      <RouterProvider router={router} />
-    </QueryClientProvider>
+  <QueryClientProvider client={queryClient}>
+    <RouterProvider router={router} />
+  </QueryClientProvider>
   );
 }
 ```
@@ -176,11 +176,11 @@ import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 
 const rootRoute = createRootRoute({
   component: () => (
-    <>
-      <Outlet />
-      <ReactQueryDevtools buttonPosition="top-right" />
-      <TanStackRouterDevtools />
-    </>
+  <>
+    <Outlet />
+    <ReactQueryDevtools buttonPosition="top-right" />
+    <TanStackRouterDevtools />
+  </>
   ),
 });
 ```
@@ -194,22 +194,22 @@ import "./App.css";
 
 function App() {
   const { data } = useQuery({
-    queryKey: ["people"],
-    queryFn: () =>
-      fetch("https://swapi.dev/api/people")
-        .then((res) => res.json())
-        .then((data) => data.results as { name: string }[]),
-    initialData: [],
+  queryKey: ["people"],
+  queryFn: () =>
+    fetch("https://swapi.dev/api/people")
+    .then((res) => res.json())
+    .then((data) => data.results as { name: string }[]),
+  initialData: [],
   });
 
   return (
-    <div>
-      <ul>
-        {data.map((person) => (
-          <li key={person.name}>{person.name}</li>
-        ))}
-      </ul>
-    </div>
+  <div>
+    <ul>
+    {data.map((person) => (
+      <li key={person.name}>{person.name}</li>
+    ))}
+    </ul>
+  </div>
   );
 }
 
@@ -240,11 +240,11 @@ const countStore = new Store(0);
 function App() {
   const count = useStore(countStore);
   return (
-    <div>
-      <button onClick={() => countStore.setState((n) => n + 1)}>
-        Increment - {count}
-      </button>
-    </div>
+  <div>
+    <button onClick={() => countStore.setState((n) => n + 1)}>
+    Increment - {count}
+    </button>
+  </div>
   );
 }
 
@@ -273,12 +273,12 @@ function App() {
   const doubledCount = useStore(doubledStore);
 
   return (
-    <div>
-      <button onClick={() => countStore.setState((n) => n + 1)}>
-        Increment - {count}
-      </button>
-      <div>Doubled - {doubledCount}</div>
-    </div>
+  <div>
+    <button onClick={() => countStore.setState((n) => n + 1)}>
+    Increment - {count}
+    </button>
+    <div>Doubled - {doubledCount}</div>
+  </div>
   );
 }
 

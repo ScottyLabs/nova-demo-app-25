@@ -32,16 +32,16 @@ export interface Message {
 
 export interface ModelResponsePart {
   choices: Array<{
-    delta: {
-      content?: string
-      image?: ImageData
-      images?: Array<{
-        type: string
-        image_url: {
-          url: string
-        }
-      }>
+  delta: {
+    content?: string
+    image?: ImageData
+    images?: Array<{
+    type: string
+    image_url: {
+      url: string
     }
+    }>
+  }
   }>
 }
 
@@ -49,8 +49,8 @@ export interface Model {
   id: string
   name: string
   architecture: {
-    input_modalities: string[]
-    output_modalities: string[]
+  input_modalities: string[]
+  output_modalities: string[]
   }
 }
 
@@ -58,9 +58,9 @@ export interface ToolCall {
   id: string
   type: string
   function: {
-    name: string
-    description?: string
-    arguments: string
+  name: string
+  description?: string
+  arguments: string
   }
 }
 

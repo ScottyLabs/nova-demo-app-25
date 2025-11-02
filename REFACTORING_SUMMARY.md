@@ -159,17 +159,17 @@ Created 10+ reusable components:
 
 ```
 Frontend:
-├── types/          (1 file)   - Type definitions
-├── utils/          (3 files)  - Pure utility functions
-├── hooks/          (4 files)  - Custom React hooks
-├── components/     (11 files) - Reusable UI components
-└── routes/         (1 file)   - Route components
+├── types/      (1 file)   - Type definitions
+├── utils/      (3 files)  - Pure utility functions
+├── hooks/      (4 files)  - Custom React hooks
+├── components/   (11 files) - Reusable UI components
+└── routes/     (1 file)   - Route components
 
 Backend:
-├── models/         (1 file)   - Pydantic schemas
-├── services/       (2 files)  - Business logic
-├── routers/        (2 files)  - API endpoints
-└── app.py          (1 file)   - FastAPI app
+├── models/     (1 file)   - Pydantic schemas
+├── services/     (2 files)  - Business logic
+├── routers/    (2 files)  - API endpoints
+└── app.py      (1 file)   - FastAPI app
 ```
 
 ## Best Practices Applied

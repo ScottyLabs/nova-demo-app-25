@@ -14,21 +14,21 @@ interface MyRouterContext {
 
 export const Route = createRootRouteWithContext<MyRouterContext>()({
   component: () => (
-    <>
-      <Header />
-      <Outlet />
-      <TanStackDevtools
-        config={{
-          position: 'bottom-left',
-        }}
-        plugins={[
-          {
-            name: 'Tanstack Router',
-            render: <TanStackRouterDevtoolsPanel />,
-          },
-          TanStackQueryDevtools,
-        ]}
-      />
-    </>
+  <>
+    <Header />
+    <Outlet />
+    <TanStackDevtools
+    config={{
+      position: 'bottom-left',
+    }}
+    plugins={[
+      {
+      name: 'Tanstack Router',
+      render: <TanStackRouterDevtoolsPanel />,
+      },
+      TanStackQueryDevtools,
+    ]}
+    />
+  </>
   ),
 })

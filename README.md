@@ -15,58 +15,58 @@ A full-stack multimodal AI chat application with Model Context Protocol (MCP) su
 
 ```
 nova-demo-app/
-├── backend/                    # FastAPI backend
-│   ├── app.py                 # Main FastAPI application
-│   ├── models/                # Pydantic models
-│   │   └── schemas.py         # Request/response schemas
-│   ├── routers/               # API route handlers
-│   │   ├── chat.py           # Chat endpoints
-│   │   └── mcp.py            # MCP endpoints
-│   ├── services/              # Business logic
+├── backend/          # FastAPI backend
+│   ├── app.py         # Main FastAPI application
+│   ├── models/        # Pydantic models
+│   │   └── schemas.py     # Request/response schemas
+│   ├── routers/         # API route handlers
+│   │   ├── chat.py       # Chat endpoints
+│   │   └── mcp.py      # MCP endpoints
+│   ├── services/        # Business logic
 │   │   ├── chat_service.py   # Chat service
-│   │   └── mcp_service.py    # MCP service
+│   │   └── mcp_service.py  # MCP service
 │   ├── mcp_client_fastmcp.py # MCP client implementation
-│   └── utils.py               # Utility functions
+│   └── utils.py         # Utility functions
 │
-├── nova-demo-frontend/        # React frontend
+├── nova-demo-frontend/    # React frontend
 │   ├── src/
-│   │   ├── components/       # React components
-│   │   │   ├── ChatHeader.tsx        # Model selection & MCP controls
-│   │   │   ├── ChatMessages.tsx      # Message display
-│   │   │   ├── ChatInput.tsx         # Input area with file uploads
-│   │   │   ├── MessageContent.tsx    # Markdown message renderer
-│   │   │   ├── ModelSelector.tsx     # Model dropdown with search
+│   │   ├── components/     # React components
+│   │   │   ├── ChatHeader.tsx    # Model selection & MCP controls
+│   │   │   ├── ChatMessages.tsx    # Message display
+│   │   │   ├── ChatInput.tsx     # Input area with file uploads
+│   │   │   ├── MessageContent.tsx  # Markdown message renderer
+│   │   │   ├── ModelSelector.tsx   # Model dropdown with search
 │   │   │   ├── ModelCapabilities.tsx # Capability badges
-│   │   │   ├── MCPControls.tsx       # MCP configuration
+│   │   │   ├── MCPControls.tsx     # MCP configuration
 │   │   │   ├── ToolApprovalModal.tsx # Tool approval dialog
-│   │   │   ├── FilePreview.tsx       # File upload previews
-│   │   │   ├── Header.tsx            # App header
-│   │   │   └── Spinner.tsx           # Loading spinner
+│   │   │   ├── FilePreview.tsx     # File upload previews
+│   │   │   ├── Header.tsx      # App header
+│   │   │   └── Spinner.tsx       # Loading spinner
 │   │   │
-│   │   ├── hooks/            # Custom React hooks
+│   │   ├── hooks/      # Custom React hooks
 │   │   │   ├── useAvailableModels.ts # Fetch models
 │   │   │   ├── useChatStreaming.ts   # Streaming chat
-│   │   │   ├── useMCP.ts             # MCP integration
-│   │   │   └── useToolApproval.ts    # Tool approval logic
+│   │   │   ├── useMCP.ts       # MCP integration
+│   │   │   └── useToolApproval.ts  # Tool approval logic
 │   │   │
-│   │   ├── types/            # TypeScript type definitions
-│   │   │   └── chat.ts      # Chat-related types
+│   │   ├── types/      # TypeScript type definitions
+│   │   │   └── chat.ts    # Chat-related types
 │   │   │
-│   │   ├── utils/            # Utility functions
+│   │   ├── utils/      # Utility functions
 │   │   │   ├── modelCapabilities.ts  # Model capability checks
-│   │   │   ├── fileHandlers.ts       # File upload handlers
-│   │   │   └── streamParser.ts       # Streaming response parser
+│   │   │   ├── fileHandlers.ts     # File upload handlers
+│   │   │   └── streamParser.ts     # Streaming response parser
 │   │   │
-│   │   └── routes/           # TanStack Router routes
-│   │       └── index.tsx    # Main chat route
+│   │   └── routes/       # TanStack Router routes
+│   │     └── index.tsx  # Main chat route
 │   │
-│   └── package.json          # Frontend dependencies
+│   └── package.json      # Frontend dependencies
 │
-├── infra/                     # Infrastructure code
-│   ├── flux.py               # Flux model integration
-│   └── wan2.py               # Wan2 model integration
+├── infra/           # Infrastructure code
+│   ├── flux.py         # Flux model integration
+│   └── wan2.py         # Wan2 model integration
 │
-└── docker-compose.yml        # Docker composition
+└── docker-compose.yml    # Docker composition
 ```
 
 ## 🏗️ Architecture

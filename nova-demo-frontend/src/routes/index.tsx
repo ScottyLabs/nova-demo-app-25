@@ -43,132 +43,132 @@ function ChatDemo() {
 
   // Tool approval handling
   const { showToolApproval, pendingToolCalls, handleToolCallApproval, requestToolApproval } =
-    useToolApproval(chatMessages, selectedModel, selectedMcpServer, (message) =>
-      setChatMessages((prev) => [...prev, message])
-    )
+  useToolApproval(chatMessages, selectedModel, selectedMcpServer, (message) =>
+    setChatMessages((prev) => [...prev, message])
+  )
 
   // Streaming chat
   const { currentlyStreaming, currentlySending } = useChatStreaming({
-    chatMessages,
-    selectedModel,
-    mcpEnabled,
-    selectedMcpServer,
-    mcpAutoApprove,
-    lastMessage,
-    onMessageUpdate: (content, image) => {
-      const assistantMessage: Message = {
-        id: Date.now().toString(),
-        role: 'assistant',
-        content,
-        ...(image && { image }),
-        timestamp: new Date(),
-      }
+  chatMessages,
+  selectedModel,
+  mcpEnabled,
+  selectedMcpServer,
+  mcpAutoApprove,
+  lastMessage,
+  onMessageUpdate: (content, image) => {
+    const assistantMessage: Message = {
+    id: Date.now().toString(),
+    role: 'assistant',
+    content,
+    ...(image && { image }),
+    timestamp: new Date(),
+    }
 
-      setChatMessages((prev) => {
-        if (prev.length === 0 || prev[prev.length - 1].role !== 'assistant') {
-          return [...prev, assistantMessage]
-        } else {
-          const newMessages = [...prev]
-          newMessages[newMessages.length - 1] = assistantMessage
-          return newMessages
-        }
-      })
-    },
-    onToolCallsRequest: requestToolApproval,
+    setChatMessages((prev) => {
+    if (prev.length === 0 || prev[prev.length - 1].role !== 'assistant') {
+      return [...prev, assistantMessage]
+    } else {
+      const newMessages = [...prev]
+      newMessages[newMessages.length - 1] = assistantMessage
+      return newMessages
+    }
+    })
+  },
+  onToolCallsRequest: requestToolApproval,
   })
 
   // Message sending handler
   const handleSendMessage = () => {
-    if (!inputValue.trim() && !uploadedImage && !uploadedAudio && !uploadedPdf) return
+  if (!inputValue.trim() && !uploadedImage && !uploadedAudio && !uploadedPdf) return
 
-    const userMessage: Message = {
-      id: Date.now().toString(),
-      role: 'user',
-      content:
-        inputValue.trim() ||
-        (uploadedImage
-          ? 'Image uploaded'
-          : uploadedAudio
-            ? 'Audio uploaded'
-            : 'PDF uploaded'),
-      image: uploadedImage || undefined,
-      audio: uploadedAudio || undefined,
-      pdf: uploadedPdf || undefined,
-      timestamp: new Date(),
-    }
+  const userMessage: Message = {
+    id: Date.now().toString(),
+    role: 'user',
+    content:
+    inputValue.trim() ||
+    (uploadedImage
+      ? 'Image uploaded'
+      : uploadedAudio
+      ? 'Audio uploaded'
+      : 'PDF uploaded'),
+    image: uploadedImage || undefined,
+    audio: uploadedAudio || undefined,
+    pdf: uploadedPdf || undefined,
+    timestamp: new Date(),
+  }
 
-    setChatMessages((prev) => [...prev, userMessage])
-    setLastMessage(
-      inputValue.trim() ||
-        (uploadedImage
-          ? 'Describe this image'
-          : uploadedAudio
-            ? 'Transcribe this audio'
-            : 'Analyze this document')
-    )
+  setChatMessages((prev) => [...prev, userMessage])
+  setLastMessage(
+    inputValue.trim() ||
+    (uploadedImage
+      ? 'Describe this image'
+      : uploadedAudio
+      ? 'Transcribe this audio'
+      : 'Analyze this document')
+  )
 
-    // Reset inputs
-    setInputValue('')
-    setUploadedImage(null)
-    setUploadedAudio(null)
-    setUploadedPdf(null)
+  // Reset inputs
+  setInputValue('')
+  setUploadedImage(null)
+  setUploadedAudio(null)
+  setUploadedPdf(null)
   }
 
   return (
-    <div
-      className="flex items-center justify-center min-h-screen bg-gradient-to-br from-purple-100 to-blue-100 p-4 text-white"
-      style={{
-        background:
-          'linear-gradient(180deg, #101C1C -89.89%, #101C1C -5.74%, #173C46 32.51%, #226981 56.18%, #33B2E2 71.72%, #F1EDE6 85.34%, #FF8945 101.72%), #CCC',
-      }}
-    >
-      <div className="w-full max-w-4xl h-[80vh] flex flex-col rounded-[20px] bg-[#101C1C]">
-        <ChatHeader
-          availableModels={availableModels}
-          selectedModel={selectedModel}
-          onModelSelect={setSelectedModel}
-          currentlyStreaming={currentlyStreaming}
-          selectedModelData={selectedModelData}
-          mcpEnabled={mcpEnabled}
-          onMcpEnabledChange={setMcpEnabled}
-          selectedMcpServer={selectedMcpServer}
-          onMcpServerChange={setSelectedMcpServer}
-          mcpServers={mcpServers}
-          mcpAutoApprove={mcpAutoApprove}
-          onMcpAutoApproveChange={setMcpAutoApprove}
-          mcpTools={mcpTools}
-        />
+  <div
+    className="flex items-center justify-center min-h-screen bg-gradient-to-br from-purple-100 to-blue-100 p-4 text-white"
+    style={{
+    background:
+      'linear-gradient(180deg, #101C1C -89.89%, #101C1C -5.74%, #173C46 32.51%, #226981 56.18%, #33B2E2 71.72%, #F1EDE6 85.34%, #FF8945 101.72%), #CCC',
+    }}
+  >
+    <div className="w-full max-w-4xl h-[80vh] flex flex-col rounded-[20px] bg-[#101C1C]">
+    <ChatHeader
+      availableModels={availableModels}
+      selectedModel={selectedModel}
+      onModelSelect={setSelectedModel}
+      currentlyStreaming={currentlyStreaming}
+      selectedModelData={selectedModelData}
+      mcpEnabled={mcpEnabled}
+      onMcpEnabledChange={setMcpEnabled}
+      selectedMcpServer={selectedMcpServer}
+      onMcpServerChange={setSelectedMcpServer}
+      mcpServers={mcpServers}
+      mcpAutoApprove={mcpAutoApprove}
+      onMcpAutoApproveChange={setMcpAutoApprove}
+      mcpTools={mcpTools}
+    />
 
-        <ChatMessages messages={chatMessages} />
+    <ChatMessages messages={chatMessages} />
 
-        <ToolApprovalModal
-          show={showToolApproval}
-          toolCalls={pendingToolCalls}
-          onApprove={() => handleToolCallApproval(true)}
-          onDecline={() => handleToolCallApproval(false)}
-        />
+    <ToolApprovalModal
+      show={showToolApproval}
+      toolCalls={pendingToolCalls}
+      onApprove={() => handleToolCallApproval(true)}
+      onDecline={() => handleToolCallApproval(false)}
+    />
 
-        <ChatInput
-          inputValue={inputValue}
-          onInputChange={setInputValue}
-          onSend={handleSendMessage}
-          uploadedImage={uploadedImage}
-          uploadedAudio={uploadedAudio}
-          uploadedPdf={uploadedPdf}
-          onImageUpload={setUploadedImage}
-          onAudioUpload={setUploadedAudio}
-          onPdfUpload={setUploadedPdf}
-          onImageRemove={() => setUploadedImage(null)}
-          onAudioRemove={() => setUploadedAudio(null)}
-          onPdfRemove={() => setUploadedPdf(null)}
-          currentlyStreaming={currentlyStreaming}
-          currentlySending={currentlySending}
-          selectedModel={selectedModelData}
-          mcpEnabled={mcpEnabled}
-          mcpToolsCount={mcpTools.length}
-          mcpAutoApprove={mcpAutoApprove}
-        />
-      </div>
+    <ChatInput
+      inputValue={inputValue}
+      onInputChange={setInputValue}
+      onSend={handleSendMessage}
+      uploadedImage={uploadedImage}
+      uploadedAudio={uploadedAudio}
+      uploadedPdf={uploadedPdf}
+      onImageUpload={setUploadedImage}
+      onAudioUpload={setUploadedAudio}
+      onPdfUpload={setUploadedPdf}
+      onImageRemove={() => setUploadedImage(null)}
+      onAudioRemove={() => setUploadedAudio(null)}
+      onPdfRemove={() => setUploadedPdf(null)}
+      currentlyStreaming={currentlyStreaming}
+      currentlySending={currentlySending}
+      selectedModel={selectedModelData}
+      mcpEnabled={mcpEnabled}
+      mcpToolsCount={mcpTools.length}
+      mcpAutoApprove={mcpAutoApprove}
+    />
     </div>
+  </div>
   )
 }

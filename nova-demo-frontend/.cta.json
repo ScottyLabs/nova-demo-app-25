@@ -8,7 +8,7 @@
   "version": 1,
   "framework": "react-cra",
   "chosenAddOns": [
-    "biome",
-    "tanstack-query"
+  "biome",
+  "tanstack-query"
   ]
 }
