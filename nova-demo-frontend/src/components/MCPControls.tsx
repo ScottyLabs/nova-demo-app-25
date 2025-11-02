@@ -19,8 +19,6 @@ export const MCPControls = ({
   selectedMcpServer,
   onMcpServerChange,
   mcpServers,
-  mcpAutoApprove,
-  onMcpAutoApproveChange,
   mcpTools,
 }: MCPControlsProps) => {
   return (
@@ -48,15 +46,6 @@ export const MCPControls = ({
         </option>
         ))}
       </select>
-      <label className="flex items-center gap-2 text-sm">
-        <input
-        type="checkbox"
-        checked={mcpAutoApprove}
-        onChange={(e) => onMcpAutoApproveChange(e.target.checked)}
-        className="rounded"
-        />
-        Auto-approve tool calls
-      </label>
       </>
     )}
     </div>

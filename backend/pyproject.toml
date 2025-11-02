@@ -11,4 +11,5 @@ dependencies = [
   "uvicorn>=0.32.0",
   "mcp[cli]>=1.0.0",
   "fastmcp>=2.12.4",
+  "openai>=2.6.1",
 ]

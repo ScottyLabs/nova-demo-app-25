@@ -9,13 +9,11 @@ import type { Message, ImageData, AudioData, PdfData } from '@/types/chat'
 import { useAvailableModels } from '@/hooks/useAvailableModels'
 import { useMCP } from '@/hooks/useMCP'
 import { useChatStreaming } from '@/hooks/useChatStreaming'
-import { useToolApproval } from '@/hooks/useToolApproval'
 
 // Components
 import { ChatHeader } from '@/components/ChatHeader'
 import { ChatMessages } from '@/components/ChatMessages'
 import { ChatInput } from '@/components/ChatInput'
-import { ToolApprovalModal } from '@/components/ToolApprovalModal'
 
 export const Route = createFileRoute('/')({
   component: ChatDemo,
@@ -40,13 +38,7 @@ function ChatDemo() {
   // MCP integration
   const { mcpServers, mcpTools } = useMCP(mcpEnabled, selectedMcpServer)
 
-  // Tool approval handling
-  const { showToolApproval, pendingToolCalls, handleToolCallApproval, requestToolApproval } =
-  useToolApproval(chatMessages, selectedModel, selectedMcpServer, (message) =>
-    setChatMessages((prev) => [...prev, message])
-  )
-
-  // Streaming chat
+  // Streaming chat - unified streaming handler
   const { currentlyStreaming, currentlySending } = useChatStreaming({
   chatMessages,
   selectedModel,
@@ -73,7 +65,6 @@ function ChatDemo() {
     }
     })
   },
-  onToolCallsRequest: requestToolApproval,
   })
 
   // Message sending handler
@@ -139,13 +130,6 @@ function ChatDemo() {
     />
 
     <ChatMessages messages={chatMessages} />
-
-    <ToolApprovalModal
-      show={showToolApproval}
-      toolCalls={pendingToolCalls}
-      onApprove={() => handleToolCallApproval(true)}
-      onDecline={() => handleToolCallApproval(false)}
-    />
 
     <ChatInput
       inputValue={inputValue}

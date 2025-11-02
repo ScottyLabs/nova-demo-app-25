@@ -38,7 +38,7 @@ class ChatRequest(BaseModel):
   model_id: str
   chat_history: List[Message]
   use_mcp: bool = False
-  mcp_server_type: str = "cmu_api"
+  approved_tool_calls: Optional[List[dict]] = []
   mcp_auto_approve: bool = False
 
 

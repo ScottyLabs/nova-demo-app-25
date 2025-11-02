@@ -39,6 +39,7 @@ async def get_mcp_tools(server_type: str):
   try:
     client = await mcp_manager.get_or_create_client(server_type)
     tools = await client.get_available_tools()
+    print(f"Retrieved tools for {server_type}: {tools}")
     return {
       "server_type": server_type,
       "tools": tools,
