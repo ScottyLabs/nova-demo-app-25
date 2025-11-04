@@ -2,193 +2,235 @@
  * Chat input area with file upload buttons
  */
 
-import { useRef } from 'react'
-import type { ImageData, AudioData, PdfData, Model } from '@/types/chat'
-import { ImagePreview, AudioPreview, PdfPreview } from './FilePreview'
-import { Spinner } from './Spinner'
 import {
-  handleImageUpload,
-  handleAudioUpload,
-  handlePdfUpload,
-} from '@/utils/fileHandlers'
+	Camera01,
+	FileAttachment04,
+	MusicNotePlus,
+	Tool01,
+} from "@untitledui/icons";
+import { useRef } from "react";
+import type { AudioData, ImageData, Model, PdfData } from "@/types/chat";
 import {
-  supportsImageInput,
-  supportsAudioInput,
-  supportsImageGeneration,
-} from '@/utils/modelCapabilities'
-import {MusicNotePlus, Camera01, FileAttachment04, Tool01} from "@untitledui/icons";
+	handleAudioUpload,
+	handleImageUpload,
+	handlePdfUpload,
+} from "@/utils/fileHandlers";
+import {
+	supportsAudioInput,
+	supportsImageGeneration,
+	supportsImageInput,
+} from "@/utils/modelCapabilities";
+import { AudioPreview, ImagePreview, PdfPreview } from "./FilePreview";
+import { Spinner } from "./Spinner";
 
 interface ChatInputProps {
-  inputValue: string
-  onInputChange: (value: string) => void
-  onSend: () => void
-  uploadedImage: ImageData | null
-  uploadedAudio: AudioData | null
-  uploadedPdf: PdfData | null
-  onImageUpload: (image: ImageData) => void
-  onAudioUpload: (audio: AudioData) => void
-  onPdfUpload: (pdf: PdfData) => void
-  onImageRemove: () => void
-  onAudioRemove: () => void
-  onPdfRemove: () => void
-  currentlyStreaming: boolean
-  currentlySending: boolean
-  selectedModel: Model | undefined
-  mcpEnabled: boolean
-  mcpToolsCount: number
-  mcpAutoApprove: boolean
+	inputValue: string;
+	onInputChange: (value: string) => void;
+	onSend: () => void;
+	uploadedImage: ImageData | null;
+	uploadedAudio: AudioData | null;
+	uploadedPdf: PdfData | null;
+	onImageUpload: (image: ImageData) => void;
+	onAudioUpload: (audio: AudioData) => void;
+	onPdfUpload: (pdf: PdfData) => void;
+	onImageRemove: () => void;
+	onAudioRemove: () => void;
+	onPdfRemove: () => void;
+	currentlyStreaming: boolean;
+	currentlySending: boolean;
+	selectedModel: Model | undefined;
+	mcpEnabled: boolean;
+	mcpToolsCount: number;
+	mcpAutoApprove: boolean;
 }
 
 export const ChatInput = ({
-  inputValue,
-  onInputChange,
-  onSend,
-  uploadedImage,
-  uploadedAudio,
-  uploadedPdf,
-  onImageUpload,
-  onAudioUpload,
-  onPdfUpload,
-  onImageRemove,
-  onAudioRemove,
-  onPdfRemove,
-  currentlyStreaming,
-  currentlySending,
-  selectedModel,
-  mcpEnabled,
-  mcpToolsCount,
-  mcpAutoApprove,
+	inputValue,
+	onInputChange,
+	onSend,
+	uploadedImage,
+	uploadedAudio,
+	uploadedPdf,
+	onImageUpload,
+	onAudioUpload,
+	onPdfUpload,
+	onImageRemove,
+	onAudioRemove,
+	onPdfRemove,
+	currentlyStreaming,
+	currentlySending,
+	selectedModel,
+	mcpEnabled,
+	mcpToolsCount,
+	mcpAutoApprove,
 }: ChatInputProps) => {
-  const fileInputRef = useRef<HTMLInputElement>(null)
-  const audioInputRef = useRef<HTMLInputElement>(null)
-  const pdfInputRef = useRef<HTMLInputElement>(null)
+	const fileInputRef = useRef<HTMLInputElement>(null);
+	const audioInputRef = useRef<HTMLInputElement>(null);
+	const pdfInputRef = useRef<HTMLInputElement>(null);
 
-  const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
-  if (e.key === 'Enter' && !e.shiftKey) {
-    e.preventDefault()
-    onSend()
-  }
-  }
+	const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
+		if (e.key === "Enter" && !e.shiftKey) {
+			e.preventDefault();
+			onSend();
+		}
+	};
 
-  return (
-  <div className="p-3 sm:p-4 md:p-6 border-t border-black/20">
-    {/* File Previews */}
-    {uploadedImage && <ImagePreview image={uploadedImage} onRemove={onImageRemove} />}
-    {uploadedAudio && <AudioPreview audio={uploadedAudio} onRemove={onAudioRemove} />}
-    {uploadedPdf && <PdfPreview pdf={uploadedPdf} onRemove={onPdfRemove} />}
+	return (
+		<div className="p-3 sm:p-4 md:p-6 border-t border-black/20">
+			{/* File Previews */}
+			{uploadedImage && (
+				<ImagePreview image={uploadedImage} onRemove={onImageRemove} />
+			)}
+			{uploadedAudio && (
+				<AudioPreview audio={uploadedAudio} onRemove={onAudioRemove} />
+			)}
+			{uploadedPdf && <PdfPreview pdf={uploadedPdf} onRemove={onPdfRemove} />}
 
-    {/* Hidden file inputs */}
-    <input
-    ref={fileInputRef}
-    type="file"
-    accept="image/*"
-    onChange={(e) => {
-      const file = e.target.files?.[0]
-      if (file) {
-      handleImageUpload(file, onImageUpload, alert)
-      }
-    }}
-    className="hidden"
-    />
-    <input
-    ref={audioInputRef}
-    type="file"
-    accept="audio/*"
-    onChange={(e) => {
-      const file = e.target.files?.[0]
-      if (file) {
-      handleAudioUpload(file, onAudioUpload, alert)
-      }
-    }}
-    className="hidden"
-    />
-    <input
-    ref={pdfInputRef}
-    type="file"
-    accept=".pdf"
-    onChange={(e) => {
-      const file = e.target.files?.[0]
-      if (file) {
-      handlePdfUpload(file, onPdfUpload, alert)
-      }
-    }}
-    className="hidden"
-    />
+			{/* Hidden file inputs */}
+			<input
+				ref={fileInputRef}
+				type="file"
+				accept="image/*"
+				onChange={(e) => {
+					const file = e.target.files?.[0];
+					if (file) {
+						handleImageUpload(file, onImageUpload, alert);
+					}
+				}}
+				className="hidden"
+			/>
+			<input
+				ref={audioInputRef}
+				type="file"
+				accept="audio/*"
+				onChange={(e) => {
+					const file = e.target.files?.[0];
+					if (file) {
+						handleAudioUpload(file, onAudioUpload, alert);
+					}
+				}}
+				className="hidden"
+			/>
+			<input
+				ref={pdfInputRef}
+				type="file"
+				accept=".pdf"
+				onChange={(e) => {
+					const file = e.target.files?.[0];
+					if (file) {
+						handlePdfUpload(file, onPdfUpload, alert);
+					}
+				}}
+				className="hidden"
+			/>
 
-    {/* Input area */}
-    <div className="flex gap-1 sm:gap-2">
-    <input
-      type="text"
-      value={inputValue}
-      onChange={(e) => onInputChange(e.target.value)}
-      onKeyDown={handleKeyDown}
-      placeholder="Type your message..."
-      className="flex-1 p-2 sm:p-3 rounded-lg bg-white/10 border border-black/20 text-black placeholder-white/50 focus:outline-none focus:ring-2 focus:ring-blue-500 text-sm sm:text-base"
-      disabled={currentlyStreaming}
-    />
+			{/* Input area */}
+			<div className="flex gap-1 sm:gap-2">
+				<input
+					type="text"
+					value={inputValue}
+					onChange={(e) => onInputChange(e.target.value)}
+					onKeyDown={handleKeyDown}
+					placeholder="Type your message..."
+					className="flex-1 p-2 sm:p-3 rounded-lg bg-white/10 border border-black/20 text-black placeholder-white/50 focus:outline-none focus:ring-2 focus:ring-blue-500 text-sm sm:text-base"
+					disabled={currentlyStreaming}
+				/>
 
-    {/* PDF upload button */}
-    <button
-      onClick={() => pdfInputRef.current?.click()}
-      disabled={currentlyStreaming}
-      className="px-2 sm:px-4 py-2 sm:py-3 disabled:bg-gray-300 bg-gray-600 disabled:cursor-not-allowed text-black rounded-lg font-medium transition-colors"
-      title="Upload PDF"
-    >
-      <FileAttachment04 className='text-white w-5 h-5 sm:w-6 sm:h-6'/>
-    </button>
+				{/* PDF upload button */}
+				<button
+					onClick={() => pdfInputRef.current?.click()}
+					disabled={currentlyStreaming}
+					className="px-2 sm:px-4 py-2 sm:py-3 disabled:bg-gray-300 bg-gray-600 disabled:cursor-not-allowed text-black rounded-lg font-medium transition-colors"
+					title="Upload PDF"
+				>
+					<FileAttachment04 className="text-white w-5 h-5 sm:w-6 sm:h-6" />
+				</button>
 
-    {/* Audio upload button */}
-    <button
-      onClick={() => audioInputRef.current?.click()}
-      disabled={currentlyStreaming}
-      className="px-2 sm:px-4 py-2 sm:py-3 disabled:bg-gray-300 bg-gray-600 disabled:cursor-not-allowed text-black rounded-lg font-medium transition-colors"
-      title="Upload audio"
-    >
-      <MusicNotePlus className='text-white w-5 h-5 sm:w-6 sm:h-6'/>
-    </button>
+				{/* Audio upload button */}
+				<button
+					onClick={() => audioInputRef.current?.click()}
+					disabled={currentlyStreaming}
+					className="px-2 sm:px-4 py-2 sm:py-3 disabled:bg-gray-300 bg-gray-600 disabled:cursor-not-allowed text-black rounded-lg font-medium transition-colors"
+					title="Upload audio"
+				>
+					<MusicNotePlus className="text-white w-5 h-5 sm:w-6 sm:h-6" />
+				</button>
 
-    {/* Image upload button */}
-    <button
-      onClick={() => fileInputRef.current?.click()}
-      disabled={currentlyStreaming}
-      className="px-2 sm:px-4 py-2 sm:py-3 disabled:bg-gray-300 bg-gray-600 disabled:cursor-not-allowed text-black rounded-lg font-medium transition-colors"
-      title="Upload image"
-    >
-      <Camera01 className='text-white w-5 h-5 sm:w-6 sm:h-6'/>
-    </button>
+				{/* Image upload button */}
+				<button
+					onClick={() => fileInputRef.current?.click()}
+					disabled={currentlyStreaming}
+					className="px-2 sm:px-4 py-2 sm:py-3 disabled:bg-gray-300 bg-gray-600 disabled:cursor-not-allowed text-black rounded-lg font-medium transition-colors"
+					title="Upload image"
+				>
+					<Camera01 className="text-white w-5 h-5 sm:w-6 sm:h-6" />
+				</button>
 
-    {/* Send button */}
-    <button
-      onClick={onSend}
-      disabled={
-      (!inputValue.trim() && !uploadedImage && !uploadedAudio && !uploadedPdf) ||
-      currentlyStreaming
-      }
-      className="px-3 sm:px-6 py-2 sm:py-3 disabled:bg-gray-300 bg-gray-600 disabled:cursor-not-allowed text-white rounded-lg font-medium transition-colors text-sm sm:text-base"
-    >
-      {currentlyStreaming ? currentlySending ? 'Sending...' : <Spinner /> : 'Send'}
-    </button>
-    </div>
+				{/* Send button */}
+				<button
+					onClick={onSend}
+					disabled={
+						(!inputValue.trim() &&
+							!uploadedImage &&
+							!uploadedAudio &&
+							!uploadedPdf) ||
+						currentlyStreaming
+					}
+					className="px-3 sm:px-6 py-2 sm:py-3 disabled:bg-gray-300 bg-gray-600 disabled:cursor-not-allowed text-white rounded-lg font-medium transition-colors text-sm sm:text-base"
+				>
+					{currentlyStreaming ? (
+						currentlySending ? (
+							"Sending..."
+						) : (
+							<Spinner />
+						)
+					) : (
+						"Send"
+					)}
+				</button>
+			</div>
 
-    {/* Help text */}
-    <div className="text-xs text-black/50 mt-2 hidden sm:block">
-    <span>Press Enter to send</span>
-    {selectedModel && (
-      <>
-      {supportsImageInput(selectedModel) && <span> • Upload images with <Camera01 className="inline-block align-middle ml-1" /> button</span>}
-      {supportsAudioInput(selectedModel) && <span> • Upload audio with <MusicNotePlus className="inline-block align-middle ml-1" /> button</span>}
-    <span> • Upload PDFs with <FileAttachment04 className="inline-block align-middle ml-1" /> button</span>
-      {supportsImageGeneration(selectedModel) && <span> • Ask for image generation</span>}
-      {mcpEnabled && mcpToolsCount > 0 && (
-        <span>
-        {' '}
-        • MCP tools enabled (<Tool01 className="inline-block align-middle ml-1" /> {mcpToolsCount} tools
-        {mcpAutoApprove ? ', auto-approved' : ', requires approval'})
-        </span>
-      )}
-      </>
-    )}
-    </div>
-  </div>
-  )
-}
+			{/* Help text */}
+			<div className="text-xs text-black/50 mt-2 hidden sm:block">
+				<span>Press Enter to send</span>
+				{selectedModel && (
+					<>
+						{supportsImageInput(selectedModel) && (
+							<span>
+								{" "}
+								• Upload images with{" "}
+								<Camera01 className="inline-block align-middle ml-1" /> button
+							</span>
+						)}
+						{supportsAudioInput(selectedModel) && (
+							<span>
+								{" "}
+								• Upload audio with{" "}
+								<MusicNotePlus className="inline-block align-middle ml-1" />{" "}
+								button
+							</span>
+						)}
+						<span>
+							{" "}
+							• Upload PDFs with{" "}
+							<FileAttachment04 className="inline-block align-middle ml-1" />{" "}
+							button
+						</span>
+						{supportsImageGeneration(selectedModel) && (
+							<span> • Ask for image generation</span>
+						)}
+						{mcpEnabled && mcpToolsCount > 0 && (
+							<span>
+								{" "}
+								• MCP tools enabled (
+								<Tool01 className="inline-block align-middle ml-1" />{" "}
+								{mcpToolsCount} tools
+								{mcpAutoApprove ? ", auto-approved" : ", requires approval"})
+							</span>
+						)}
+					</>
+				)}
+			</div>
+		</div>
+	);
+};

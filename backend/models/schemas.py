@@ -39,13 +39,4 @@ class ChatRequest(BaseModel):
   chat_history: List[Message]
   use_mcp: bool = False
   approved_tool_calls: Optional[List[dict]] = []
-  mcp_auto_approve: bool = False
 
-
-class ToolCallApprovalRequest(BaseModel):
-  """Request model for tool call approval"""
-  tool_calls: List[dict]
-  approved: bool
-  chat_history: List[Message]
-  model_id: str
-  mcp_server_type: str = "cmu_api"

@@ -6,7 +6,7 @@ from fastapi import APIRouter
 from fastapi.responses import StreamingResponse
 import requests
 
-from models.schemas import ChatRequest, ToolCallApprovalRequest
+from models.schemas import ChatRequest
 from services.chat_service import ChatService
 import json
 
@@ -29,7 +29,7 @@ async def chat_streaming(request: ChatRequest):
   
   if not model_data:
     return {"error": "Model not found"}
-  print("GOT CALL: ", request)
+
   chat_service = ChatService(request.model_id, model_data)
   messages = chat_service.prepare_messages(request.chat_history)
   
@@ -47,7 +47,6 @@ async def chat_streaming(request: ChatRequest):
     async for event in chat_service.stream_response(
             payload,
             use_mcp=request.use_mcp,
-            mcp_auto_approve=request.mcp_auto_approve,
             accumulated_tool_calls=request.approved_tool_calls
         ):
         yield event
