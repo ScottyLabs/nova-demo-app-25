@@ -10,8 +10,6 @@ interface MCPControlsProps {
 	selectedMcpServer: string;
 	onMcpServerChange: (server: string) => void;
 	mcpServers: string[];
-	mcpAutoApprove: boolean;
-	onMcpAutoApproveChange: (autoApprove: boolean) => void;
 	mcpTools: any[];
 }
 

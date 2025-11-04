@@ -41,7 +41,6 @@ interface ChatInputProps {
 	selectedModel: Model | undefined;
 	mcpEnabled: boolean;
 	mcpToolsCount: number;
-	mcpAutoApprove: boolean;
 }
 
 export const ChatInput = ({
@@ -62,7 +61,6 @@ export const ChatInput = ({
 	selectedModel,
 	mcpEnabled,
 	mcpToolsCount,
-	mcpAutoApprove,
 }: ChatInputProps) => {
 	const fileInputRef = useRef<HTMLInputElement>(null);
 	const audioInputRef = useRef<HTMLInputElement>(null);
@@ -224,8 +222,7 @@ export const ChatInput = ({
 								{" "}
 								• MCP tools enabled (
 								<Tool01 className="inline-block align-middle ml-1" />{" "}
-								{mcpToolsCount} tools
-								{mcpAutoApprove ? ", auto-approved" : ", requires approval"})
+								{mcpToolsCount} tools)
 							</span>
 						)}
 					</>

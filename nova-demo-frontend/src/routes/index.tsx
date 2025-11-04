@@ -29,7 +29,6 @@ function ChatDemo() {
 	);
 	const [mcpEnabled, setMcpEnabled] = useState(false);
 	const [selectedMcpServer, setSelectedMcpServer] = useState("cmu_api");
-	const [mcpAutoApprove, setMcpAutoApprove] = useState(true);
 	const [sidebarOpen, setSidebarOpen] = useState(false);
 
 	// Fetch available models
@@ -47,7 +46,6 @@ function ChatDemo() {
 		selectedModel,
 		mcpEnabled,
 		selectedMcpServer,
-		mcpAutoApprove,
 		lastMessage,
 		onMessageUpdate: (content, image) => {
 			const assistantMessage: Message = {
@@ -177,8 +175,6 @@ function ChatDemo() {
 					selectedMcpServer={selectedMcpServer}
 					onMcpServerChange={setSelectedMcpServer}
 					mcpServers={mcpServers}
-					mcpAutoApprove={mcpAutoApprove}
-					onMcpAutoApproveChange={setMcpAutoApprove}
 					mcpTools={mcpTools}
 				/>
 			</div>
@@ -205,7 +201,6 @@ function ChatDemo() {
 					selectedModel={selectedModelData}
 					mcpEnabled={mcpEnabled}
 					mcpToolsCount={mcpTools.length}
-					mcpAutoApprove={mcpAutoApprove}
 				/>
 			</div>
 		</div>

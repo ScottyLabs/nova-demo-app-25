@@ -18,8 +18,6 @@ interface ChatHeaderProps {
 	selectedMcpServer: string;
 	onMcpServerChange: (server: string) => void;
 	mcpServers: string[];
-	mcpAutoApprove: boolean;
-	onMcpAutoApproveChange: (autoApprove: boolean) => void;
 	mcpTools: any[];
 }
 
@@ -34,8 +32,6 @@ export const ChatHeader = ({
 	selectedMcpServer,
 	onMcpServerChange,
 	mcpServers,
-	mcpAutoApprove,
-	onMcpAutoApproveChange,
 	mcpTools,
 }: ChatHeaderProps) => {
 	return (
@@ -58,8 +54,6 @@ export const ChatHeader = ({
 				selectedMcpServer={selectedMcpServer}
 				onMcpServerChange={onMcpServerChange}
 				mcpServers={mcpServers}
-				mcpAutoApprove={mcpAutoApprove}
-				onMcpAutoApproveChange={onMcpAutoApproveChange}
 				mcpTools={mcpTools}
 			/>
 		</div>

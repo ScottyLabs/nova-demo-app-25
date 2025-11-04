@@ -21,7 +21,6 @@ interface UseChatStreamingProps {
 	selectedModel: string;
 	mcpEnabled: boolean;
 	selectedMcpServer: string;
-	mcpAutoApprove: boolean;
 	lastMessage: string;
 	onMessageUpdate: (content: string, image?: any) => void;
 }
@@ -31,7 +30,6 @@ export const useChatStreaming = ({
 	selectedModel,
 	mcpEnabled,
 	selectedMcpServer,
-	mcpAutoApprove,
 	lastMessage,
 	onMessageUpdate,
 }: UseChatStreamingProps) => {
