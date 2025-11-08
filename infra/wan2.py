@@ -74,7 +74,7 @@ NUM_INFERENCE_STEPS = 4  # use ~50 for [dev], smaller for [schnell]
 
 
 @app.cls(
-  gpu="H200",  # fast GPU with strong software support
+  gpu="H100",  # fast GPU with strong software support
   scaledown_window= 2 * MINUTES,
   timeout=5 * MINUTES,  # leave plenty of time for compilation
   volumes={  # add Volumes to store serializable compilation artifacts, see section on torch.compile below
@@ -97,7 +97,8 @@ class Model:
   def enter(self):
     dtype = torch.bfloat16
     device = "cuda"
-    model_id = "Wan-AI/Wan2.2-T2V-A14B-Diffusers"
+    model_id = "Wan-AI/Wan2.2-TI2V-5B-Diffusers"
+
     vae = AutoencoderKLWan.from_pretrained(model_id, subfolder="vae", torch_dtype=torch.float32)
     self.pipe = WanPipeline.from_pretrained(model_id, vae=vae, torch_dtype=dtype)
     self.pipe.to(device)
